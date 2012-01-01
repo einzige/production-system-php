@@ -18,6 +18,9 @@ jimport('joomla.application.component.controller');
  */
 class ProductionSystemController extends JController
 {
+    function index() {
+        echo "ADMIN WORKS";
+    }
     /**
      * Method to display the view
      *

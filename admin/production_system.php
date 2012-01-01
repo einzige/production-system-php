@@ -10,11 +10,11 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
 // Require the base controller
-require_once( JPATH_COMPONENT.DS.'app'.DS.'controllers'.DS.'base.php' );
+require_once( JPATH_COMPONENT.DS.'controllers'.DS.'base.php' );
 
 // Require specific controller if requested
 if ($controller = JRequest::getWord('controller')) {
-    $path = JPATH_COMPONENT.DS.'app'.DS.'controllers'.DS.$controller.'.php';
+    $path = JPATH_COMPONENT.DS.'controllers'.DS.$controller.'.php';
 
     if (file_exists($path)) {
         require_once $path;
