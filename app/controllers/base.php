@@ -18,6 +18,11 @@ jimport('joomla.application.component.controller');
  */
 class ProductionSystemController extends JController
 {
+    function index()
+    {
+        echo "INDEX!";
+    }
+
     /**
      * Method to display the view
      *
