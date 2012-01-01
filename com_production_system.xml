@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="1.7" method="upgrade">
+    <name>com_production_system</name>
+    <author>Anton Goroshkin</author>
+    <creationDate>January 2011</creationDate>
+    <copyright>(C) 2011 - 2012 Siberian aerospace university. All rights reserved.	</copyright>
+    <license>GNU General Public License version 2 or later.</license>
+    <authorEmail>antichaos@gmail.com</authorEmail>
+    <authorUrl>antichaos.narod.ru</authorUrl>
+    <version>1.7.0</version>
+    <description>Provides to build complex datasets using production rules.</description>
+    <files>
+        <filename>index.html</filename>
+        <filename>com_production_system.php</filename>
+    </files>
+    <files folder="app">
+        <filename>index.html</filename>
+        <folder>controllers</folder>
+        <folder>helpers</folder>
+        <folder>models</folder>
+        <folder>views</folder>
+    </files>
+    <administration>
+        <files folder="admin">
+            <filename>index.html</filename>
+            <filename>images/index.html</filename>
+            <filename>images/production_system.png</filename>
+            <folder>controllers</folder>
+            <folder>helpers</folder>
+            <folder>models</folder>
+            <folder>views</folder>
+        </files>
+        <media folder="admin" destination="com_production_system/images">
+            <filename>images/production_system.png</filename>
+        </media>
+        <menu img="components/com_production_system/images/production_system.png">Production System</menu>
+        <submenu>
+            <menu link="option=com_production_system&task=index_rules">Show the entire system including all rules.</menu>
+            <menu link="option=com_production_system&task=new_rule">Create rule.</menu>
+            <menu link="option=com_production_system&task=new_sign">Create sign.</menu>
+        </submenu>
+    </administration>
+    <params>
+        <param name="results_limit" type="number" label="Results limit:" description="Results number to be displayed on the page." />
+    </params>
+</extension>
