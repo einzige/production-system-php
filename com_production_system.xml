@@ -3,7 +3,7 @@
     <name>com_production_system</name>
     <author>Anton Goroshkin</author>
     <creationDate>January 2011</creationDate>
-    <copyright>(C) 2011 - 2012 Siberian aerospace university. All rights reserved.	</copyright>
+    <copyright>(C) 2011 - 2012 Siberian aerospace university. All rights reserved.</copyright>
     <license>GNU General Public License version 2 or later.</license>
     <authorEmail>antichaos@gmail.com</authorEmail>
     <authorUrl>antichaos.narod.ru</authorUrl>
@@ -15,6 +15,7 @@
     </files>
     <files folder="app">
         <filename>index.html</filename>
+        <folder>assets</folder>
         <folder>controllers</folder>
         <folder>helpers</folder>
         <folder>models</folder>
@@ -23,21 +24,16 @@
     <administration>
         <files folder="admin">
             <filename>index.html</filename>
-            <filename>images/index.html</filename>
-            <filename>images/production_system.png</filename>
+            <folder>assets</folder>
             <folder>controllers</folder>
             <folder>helpers</folder>
             <folder>models</folder>
             <folder>views</folder>
         </files>
-        <media folder="admin" destination="com_production_system/images">
-            <filename>images/production_system.png</filename>
-        </media>
-        <menu img="components/com_production_system/images/production_system.png">Production System</menu>
         <submenu>
-            <menu link="option=com_production_system&task=index_rules">Show the entire system including all rules.</menu>
-            <menu link="option=com_production_system&task=new_rule">Create rule.</menu>
-            <menu link="option=com_production_system&task=new_sign">Create sign.</menu>
+            <menu link="option=com_production_system&task=index&controller=rules">Show the entire system including all rules.</menu>
+            <menu link="option=com_production_system&task=new&controller=rules">Create rule.</menu>
+            <menu link="option=com_production_system&task=new&controller=signs">Create sign.</menu>
         </submenu>
     </administration>
     <params>

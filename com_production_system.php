@@ -10,7 +10,7 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
 // Require the base controller
-require_once( JPATH_COMPONENT.DS.'controllers'.DS.'base_controller.php' );
+require_once( JPATH_COMPONENT.DS.'controllers'.DS.'base.php' );
 
 // Require specific controller if requested
 if($controller = JRequest::getWord('controller')) {
@@ -23,7 +23,7 @@ if($controller = JRequest::getWord('controller')) {
 }
 
 // Create the controller
-$classname  = 'ProductionSystemController'.$controller;
+$classname  = $controller.'ProductionSystemController';
 $controller = new $classname();
 
 // Perform the Request task
