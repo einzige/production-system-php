@@ -31,9 +31,9 @@
             <folder>views</folder>
         </files>
         <submenu>
-            <menu link="option=com_production_system&task=index&controller=rules">Show the entire system including all rules.</menu>
-            <menu link="option=com_production_system&task=new&controller=rules">Create rule.</menu>
-            <menu link="option=com_production_system&task=new&controller=signs">Create sign.</menu>
+            <menu link="option=com_production_system&amp;amptask=index&amp;controller=rules">Show the entire system including all rules.</menu>
+            <menu link="option=com_production_system&amp;task=new&amp;controller=rules">Create rule.</menu>
+            <menu link="option=com_production_system&amp;task=new&amp;controller=signs">Create sign.</menu>
         </submenu>
     </administration>
     <params>
