@@ -1,31 +1,19 @@
-<?php
-/**
- * @package    ProductionSystem
- * @subpackage Components
- * @license    GNU/GPL
- */
-
-// No direct access
-defined( '_JEXEC' ) or die( 'Restricted access' );
+<?php defined( '_JEXEC' ) or die( 'Restricted access' );
 
 jimport('joomla.application.component.controller');
 
-/**
- * Hello World Component Controller
- *
- * @package    Joomla.Tutorials
- * @subpackage Components
- */
+
 class ProductionSystemController extends JController
 {
-    function index() {
-        echo "ADMIN WORKS";
+    var $home = 'index.php?option=com_production_system';
+
+    function __construct()
+    {
+        parent::__construct();
     }
-    /**
-     * Method to display the view
-     *
-     * @access    public
-     */
+
+    function index() {}
+
     function display()
     {
         parent::display();
