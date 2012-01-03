@@ -9,10 +9,10 @@
         <?php echo JHtml::_('grid.id', $i, $item->id); ?>
     </td>
     <td class="center" style="color:red; font-size: 14pt;">
-        <?php echo $item->weight; ?>
+        <?php echo $item->name; ?>
     </td>
-    <td style="color:green; font-size: 12pt;">
-        <?php echo $item->body; ?>
+    <td>
+        <?php echo $item->description; ?>
     </td>
 </tr>
 <?php endforeach; ?>

@@ -2,9 +2,9 @@
 
 jimport('joomla.application.component.controlleradmin');
 
-class QuizControllerRules extends JControllerAdmin
+class QuizControllerSigns extends JControllerAdmin
 {
-    public function getModel($name = 'Rule', $prefix = 'QuizModel')
+    public function getModel($name = 'Sign', $prefix = 'QuizModel')
     {
         $model = parent::getModel($name, $prefix, array('ignore_request' => true));
         return $model;

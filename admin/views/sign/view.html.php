@@ -2,7 +2,7 @@
 
 jimport('joomla.application.component.view');
 
-class QuizViewRule extends JView
+class QuizViewSign extends JView
 {
     public function display($tpl = null)
     {
@@ -36,16 +36,16 @@ class QuizViewRule extends JView
     {
         JRequest::setVar('hidemainmenu', true);
         $isNew = ($this->item->id == 0);
-        JToolBarHelper::title($isNew ? "New Rule" : "Edit Rule");
-        JToolBarHelper::save('rule.save');
-        JToolBarHelper::cancel('rule.cancel', $isNew ? 'JTOOLBAR_CANCEL' : 'JTOOLBAR_CLOSE');
+        JToolBarHelper::title($isNew ? "New Sign" : "Edit Sign");
+        JToolBarHelper::save('sign.save');
+        JToolBarHelper::cancel('sign.cancel', $isNew ? 'JTOOLBAR_CANCEL' : 'JTOOLBAR_CLOSE');
     }
 
     protected function setDocument()
     {
         $isNew = ($this->item->id < 1);
         $document = JFactory::getDocument();
-        $document->setTitle($isNew ? "Create rule" : "Edit rule");
+        $document->setTitle($isNew ? "Create sign" : "Edit sign");
         $document->addScript(JURI::root() . $this->script);
         $document->addScript(JURI::root() . "/administrator/components/com_quiz/assets/submitbutton.js");
         JText::script('COM_QUIZ_SIGN_ERROR_UNACCEPTABLE');
