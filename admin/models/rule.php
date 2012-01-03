@@ -4,7 +4,7 @@ jimport('joomla.application.component.model');
 require_once JPATH_COMPONENT.DS.'tables'.DS.'rules'.'.php';
 
 
-class RulesModelRule extends JModel
+class RuleModelRule extends JModel
 {
     function __construct()
     {
@@ -12,6 +12,19 @@ class RulesModelRule extends JModel
 
         $array = JRequest::getVar('cid',  0, '', 'array');
         $this->setId((int)$array[0]);
+    }
+
+    /**
+     * Returns a reference to the a Table object, always creating it.
+     *
+     * @param	type	The table type to instantiate
+     * @param	string	A prefix for the table class name. Optional.
+     * @param	array	Configuration array for model. Optional.
+     * @return	JTable	A database object
+     */
+    public function getTable($type = 'Rule', $prefix = 'RuleTable', $config = array())
+    {
+        return JTable::getInstance($type, $prefix, $config);
     }
 
     static function all() {

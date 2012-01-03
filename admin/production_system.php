@@ -31,9 +31,5 @@ $controller = new $class_name();
 
 // Perform the Request task
 $task = JRequest::getWord('task');
-
-// Assign default behaviour
-if (empty($task)){ $task = 'display'; }
-
 $controller->execute($task);
 $controller->redirect();

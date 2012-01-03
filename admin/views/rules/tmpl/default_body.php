@@ -1,0 +1,22 @@
+<?php defined('_JEXEC') or die('Restricted Access'); ?>
+
+<?php foreach($this->items as $i => $item): ?>
+<tr class="row<?php echo $i % 2; ?>">
+    <td>
+        <?php echo $item->id; ?>
+    </td>
+    <td>
+        <?php echo JHtml::_('grid.id', $i, $item->id); ?>
+    </td>
+    <td class="center" style="color:red; font-size: 14pt;">
+        <?php echo $item->weight; ?>
+    </td>
+    <td style="color:green; font-size: 12pt;">
+        <?php echo $item->body; ?>
+    </td>
+
+    <td class="center" style="color:orange; font-size: 9pt;">
+        <?php echo '<a href="index.php?option=com_production_system&controller=rule&task=edit&cid='.$item->id.'"'.'>edit</a>'; ?>
+    </td>
+</tr>
+<?php endforeach; ?>

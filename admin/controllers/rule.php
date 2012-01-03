@@ -22,14 +22,6 @@ class RuleController extends ProductionSystemController
         JToolBarHelper::title("The list of rules.");
         parent::display();
     }
-/*
-    function add() {
-        $this->document->setTitle("Add a new rule.");
-        JToolBarHelper::title("Add a new rule.");
-        JRequest::setVar('layout', 'form');
-        parent::display();
-    }
-*/
 
     function edit() {
         JRequest::setVar('hidemainmenu', 1);
@@ -81,17 +73,4 @@ class RuleController extends ProductionSystemController
         $msg = JText::_( 'Operation Cancelled' );
         $this->setRedirect( 'index.php?option=com_production_system', $msg );
     }
-/*
-    function create() {
-        $this->setRedirect($this->home, 'The rule has been successfully created.');
-    }
-
-    function change() {
-        $this->setRedirect($this->home, 'The rule has been successfully updated.');
-    }
-
-    function remove() {
-        $this->setRedirect($this->home, 'The rule has been successfully removed.');
-    }
-*/
 }

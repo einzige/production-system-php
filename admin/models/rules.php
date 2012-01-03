@@ -11,7 +11,7 @@ class RuleModelRules extends JModelList
      */
     protected function getListQuery()
     {
-        return JFactory::getDBO()->getQuery(true)->select('id,weight,description')
+        return JFactory::getDBO()->getQuery(true)->select('id,weight,body')
                                                  ->from('#__rules');
     }
 }

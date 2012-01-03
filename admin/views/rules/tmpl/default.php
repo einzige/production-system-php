@@ -1,28 +1,18 @@
-<div>
-    <h1>List of rules.</h1>
+<?php
+// No direct access to this file
+defined('_JEXEC') or die('Restricted Access');
+// load tooltip behavior
+JHtml::_('behavior.tooltip');
+?>
+<form action="<?php echo JRoute::_('index.php?option=com_production_system&controller=rules'); ?>" method="post" name="adminForm">
     <table class="adminlist">
-        <thead>
-            <th class="left">ID</th>
-            <th class="nowrap">Weight</th>
-            <th class="nowrap">Description</th>
-            <th class="nowrap"></th>
-        </thead>
-        <tfoot></tfoot>
-        <?php foreach ($this->rules as $item ) : ?>
-            <tr>
-                <td width="5">
-                    <?php echo $item->id; ?>
-                </td>
-                <td width="20" class="center" style="color:red; font-size: 14pt;">
-                    <?php echo $item->weight; ?>
-                </td>
-                <td style="color:green; font-size: 12pt;">
-                    <?php echo $item->body; ?>
-                </td>
-                <td class="center" style="color:orange; font-size: 9pt;">
-                    <?php echo '<a href="index.php?option=com_production_system&controller=rules&task=edit&cid='.$item->id.'"'.'>edit</a>'; ?>
-                </td>
-            </tr>
-        <?php endforeach ?>
+        <thead><?php echo $this->loadTemplate('head');?></thead>
+        <tfoot><?php echo $this->loadTemplate('foot');?></tfoot>
+        <tbody><?php echo $this->loadTemplate('body');?></tbody>
     </table>
-</div>
+    <div>
+        <input type="hidden" name="task" value="" />
+        <input type="hidden" name="boxchecked" value="0" />
+        <?php echo JHtml::_('form.token'); ?>
+    </div>
+</form>
