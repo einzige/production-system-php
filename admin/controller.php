@@ -2,7 +2,7 @@
 
 jimport('joomla.application.component.controller');
 
-class ProductionSystemController extends JController
+class QuizController extends JController
 {
     function display($cachable = false)
     {

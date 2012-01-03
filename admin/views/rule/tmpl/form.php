@@ -25,7 +25,7 @@
     </div>
     <div class="clr"></div>
 
-    <input type="hidden" name="option" value="com_production_system" />
+    <input type="hidden" name="option" value="com_quiz" />
     <input type="hidden" name="id" value="<?php echo $this->rule->id; ?>" />
     <input type="hidden" name="task" value="" />
     <input type="hidden" name="controller" value="rules" />

@@ -2,7 +2,7 @@
 
 jimport('joomla.application.component.modellist');
 
-class RuleModelRules extends JModelList
+class QuizModelRules extends JModelList
 {
     /**
      * Method to build an SQL query to load the list data.

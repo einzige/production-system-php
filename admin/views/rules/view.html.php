@@ -2,7 +2,7 @@
 
 jimport( 'joomla.application.component.view');
 
-class RulesViewRules extends JView
+class QuizViewRules extends JView
 {
     function display($tpl = null)
     {
@@ -37,5 +37,3 @@ class RulesViewRules extends JView
         JToolBarHelper::addNewX('rule.add');
     }
 }
-
-class ProductionSystemViewRules extends RulesViewRules {}

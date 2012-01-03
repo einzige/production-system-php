@@ -2,7 +2,7 @@
 
 jimport('joomla.application.component.view');
 
-class RuleViewRule extends JView
+class QuizViewRule extends JView
 {
     public function display($tpl = null)
     {
@@ -47,7 +47,7 @@ class RuleViewRule extends JView
         $document = JFactory::getDocument();
         $document->setTitle($isNew ? "Create rule" : "Edit rule");
         $document->addScript(JURI::root() . $this->script);
-        $document->addScript(JURI::root() . "/administrator/components/com_production_system/assets/submitbutton.js");
-        JText::script('COM_PRODUCTION_SYSTEM_RULE_ERROR_UNACCEPTABLE');
+        $document->addScript(JURI::root() . "/administrator/components/com_quiz/assets/submitbutton.js");
+        JText::script('COM_QUIZ_RULE_ERROR_UNACCEPTABLE');
     }
 }

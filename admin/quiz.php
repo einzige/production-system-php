@@ -28,6 +28,6 @@ $controller->redirect();//*/
 
 jimport('joomla.application.component.controller');
 
-$controller = JController::getInstance('ProductionSystem');
+$controller = JController::getInstance('Quiz');
 $controller->execute(JRequest::getCmd('task'));
 $controller->redirect();

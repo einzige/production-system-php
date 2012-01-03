@@ -16,7 +16,7 @@
     </td>
 
     <td class="center" style="color:orange; font-size: 9pt;">
-        <?php echo '<a href="index.php?option=com_production_system&controller=rule&task=edit&cid='.$item->id.'"'.'>edit</a>'; ?>
+        <?php echo '<a href="index.php?option=com_quiz&controller=rule&task=edit&cid='.$item->id.'"'.'>edit</a>'; ?>
     </td>
 </tr>
 <?php endforeach; ?>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="1.7" method="upgrade">
-    <name>production_system</name>
+    <name>quiz</name>
     <author>Anton Goroshkin</author>
     <creationDate>January 2011</creationDate>
     <copyright>(C) 2011 - 2012 Siberian aerospace university. All rights reserved.</copyright>
@@ -31,7 +31,8 @@
     <administration>
         <files folder="admin">
             <filename>index.html</filename>
-            <filename>production_system.php</filename>
+            <filename>controller.php</filename>
+            <filename>quiz.php</filename>
             <folder>assets</folder>
             <folder>controllers</folder>
             <folder>models</folder>

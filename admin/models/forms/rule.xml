@@ -1,4 +1,4 @@
-<form addrulepath="/administrator/components/com_production_system/models/rules">
+<form addrulepath="/administrator/components/com_quiz/models/rules">
     <fieldset>
         <field name="id" type="hidden"/>
         <field name="body" type="text" label="Body" description="Description of the rule" size="40" class="inputbox validate-body" validate="body" required="true" default=""/>

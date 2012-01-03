@@ -2,4 +2,4 @@
 
 jimport('joomla.application.component.controllerform');
 
-class RuleControllerProductionSystem extends JControllerForm {}
+class QuizControllerRule extends JControllerForm {}
