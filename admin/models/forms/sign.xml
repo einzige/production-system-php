@@ -1,0 +1,7 @@
+<form addrulepath="/administrator/components/com_quiz/models/rules">
+    <fieldset>
+        <field name="id" type="hidden"/>
+        <field name="name" type="text" label="Name" description="Name of the sign" size="40" class="inputbox validate-name" validate="name" required="true" default=""/>
+        <field name="description" type="text" label="Description" description="Description of the sign" size="40" default=""/>
+    </fieldset>
+</form>

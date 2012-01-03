@@ -2,7 +2,7 @@
 /**
  * @package    ProductionSystem
  * @subpackage Components
- * components/com_production_system/com_production_system.php
+ * components/com_production_system/production_system.php
  * @license    GNU/GPL
  */
 
@@ -10,11 +10,12 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
 // Require the base controller
-require_once( JPATH_COMPONENT.DS.'controllers'.DS.'base.php' );
+require_once( JPATH_COMPONENT_SITE.DS.'controllers'.DS.'base.php' );
 
 // Require specific controller if requested
-if($controller = JRequest::getWord('controller')) {
-    $path = JPATH_COMPONENT.DS.'controllers'.DS.$controller.'.php';
+if ($controller = JRequest::getWord('controller')) {
+    $path = JPATH_COMPONENT_SITE.DS.'controllers'.DS.$controller.'.php';
+
     if (file_exists($path)) {
         require_once $path;
     } else {
@@ -27,7 +28,10 @@ $classname  = $controller.'ProductionSystemController';
 $controller = new $classname();
 
 // Perform the Request task
-$controller->execute( JRequest::getWord( 'task' ) );
+$task = JRequest::getWord('task');
 
-// Redirect if set by the controller
+// Assign default behaviour
+if (empty($task)){ $task = 'index'; }
+
+$controller->execute($task);
 $controller->redirect();

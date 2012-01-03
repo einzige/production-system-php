@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="1.7" method="upgrade">
-    <name>com_production_system</name>
+    <name>quiz</name>
     <author>Anton Goroshkin</author>
     <creationDate>January 2011</creationDate>
     <copyright>(C) 2011 - 2012 Siberian aerospace university. All rights reserved.</copyright>
@@ -9,33 +9,41 @@
     <authorUrl>antichaos.narod.ru</authorUrl>
     <version>1.7.0</version>
     <description>Provides to build complex datasets using production rules.</description>
-    <files>
+    <files folder="site">
         <filename>index.html</filename>
-        <filename>com_production_system.php</filename>
-        <folder>app</folder>
-        <folder>admin</folder>
-    </files>
-    <files folder="app">
-        <filename>index.html</filename>
+        <filename>production_system.php</filename>
         <folder>assets</folder>
         <folder>controllers</folder>
-        <folder>helpers</folder>
         <folder>models</folder>
+        <folder>helpers</folder>
         <folder>views</folder>
     </files>
+    <install> <!-- Runs on install -->
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+    <uninstall> <!-- Runs on uninstall -->
+        <sql>
+            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
     <administration>
         <files folder="admin">
             <filename>index.html</filename>
+            <filename>controller.php</filename>
+            <filename>quiz.php</filename>
             <folder>assets</folder>
             <folder>controllers</folder>
-            <folder>helpers</folder>
             <folder>models</folder>
+            <folder>tables</folder>
+            <folder>helpers</folder>
             <folder>views</folder>
+            <folder>sql</folder>
         </files>
         <submenu>
-            <menu link="option=com_production_system&amp;amptask=index&amp;controller=rules">Show the entire system including all rules.</menu>
-            <menu link="option=com_production_system&amp;task=new&amp;controller=rules">Create rule.</menu>
-            <menu link="option=com_production_system&amp;task=new&amp;controller=signs">Create sign.</menu>
+            <menu link="option=com_quiz">Manage Rules.</menu>
+            <menu link="option=com_quiz&amp;view=signs">Manage Signs.</menu>
         </submenu>
     </administration>
     <params>
