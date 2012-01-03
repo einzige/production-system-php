@@ -33,7 +33,7 @@ $controller = new $class_name();
 $task = JRequest::getWord('task');
 
 // Assign default behaviour
-if (empty($task)){ $task = 'index'; }
+if (empty($task)){ $task = 'display'; }
 
 $controller->execute($task);
 $controller->redirect();
