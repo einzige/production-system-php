@@ -41,7 +41,7 @@
             <folder>sql</folder>
         </files>
         <submenu>
-            <menu link="option=com_production_system&amp;task=index&amp;controller=rules">Show the entire system including all rules.</menu>
+            <menu link="option=com_production_system&amp;controller=rules">Show the entire system including all rules.</menu>
             <menu link="option=com_production_system&amp;task=add&amp;controller=rules">Create rule.</menu>
             <menu link="option=com_production_system&amp;task=add&amp;controller=signs">Create sign.</menu>
         </submenu>

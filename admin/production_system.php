@@ -1,16 +1,7 @@
-<?php
-/**
- * @package    ProductionSystem
- * @subpackage Components
- * components/com_production_system/production_system.php
- * @license    GNU/GPL
- */
-
-// No direct access
-defined( '_JEXEC' ) or die( 'Restricted access' );
-
+<?php defined( '_JEXEC' ) or die( 'Restricted access' );
+/*
 // Require the base controller
-require_once( JPATH_COMPONENT_ADMINISTRATOR.DS.'controllers'.DS.'base.php' );
+require_once( JPATH_COMPONENT_ADMINISTRATOR.DS.'controllers'.DS.'rules.php' );
 
 // Require specific controller if requested
 if ($controller = JRequest::getWord('controller')) {
@@ -24,12 +15,19 @@ if ($controller = JRequest::getWord('controller')) {
 }
 
 // Create the controller
-if (empty($controller)) { $controller = 'ProductionSystem'; }
+if (empty($controller)) { $controller = 'Rules'; }
 
 $class_name  = $controller.'Controller';
 $controller = new $class_name();
 
 // Perform the Request task
 $task = JRequest::getWord('task');
+
 $controller->execute($task);
+$controller->redirect();//*/
+
+jimport('joomla.application.component.controller');
+
+$controller = JController::getInstance('ProductionSystem');
+$controller->execute(JRequest::getCmd('task'));
 $controller->redirect();

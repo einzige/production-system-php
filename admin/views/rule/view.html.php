@@ -1,36 +1,53 @@
 <?php defined( '_JEXEC' ) or die( 'Restricted access' );
 
-jimport( 'joomla.application.component.view');
-require_once JPATH_COMPONENT.DS.'models'.DS.'rule'.'.php';
+jimport('joomla.application.component.view');
 
-class RulesViewRules extends JView
+class RuleViewRule extends JView
 {
-    function display($tpl = null)
+    public function display($tpl = null)
     {
-        $rule = $this->loadRule();
-        $isNew = ($rule->id < 1);
+        // Get the Data
+        $form = $this->get('Form');
+        $item = $this->get('Item');
+        $script = $this->get('Script');
 
-        $text = $isNew ? JText::_( 'New' ) : JText::_( 'Edit' );
-        $title = JText::_( 'Rule' ).': <small><small>[ ' . $text.' ]</small></small>';
-        JToolBarHelper::title($title);
-        JToolBarHelper::title($title);
-        JToolBarHelper::save();
-
-        if ($isNew)  {
-            JToolBarHelper::cancel();
-        } else {
-            JToolBarHelper::cancel( 'cancel', 'Close' );
+        // Check for errors.
+        if (count($errors = $this->get('Errors')))
+        {
+            JError::raiseError(500, implode('<br />', $errors));
+            return false;
         }
+        // Assign the Data
+        $this->form = $form;
+        $this->item = $item;
+        $this->script = $script;
 
-        $this->assignRef('rule', $rule);
+        // Set the toolbar
+        $this->addToolBar();
 
+        // Display the template
         parent::display($tpl);
+
+        // Set the document
+        $this->setDocument();
     }
 
-    // TODO (SZ): move to controller.
-    function loadRule() {
-        $model = new RulesModelRule();
-        $rule = & $model->getData();
-        return $rule;
+    protected function addToolBar()
+    {
+        JRequest::setVar('hidemainmenu', true);
+        $isNew = ($this->item->id == 0);
+        JToolBarHelper::title($isNew ? "New rule" : "Edit rule", 'rule');
+        JToolBarHelper::save('rule.save');
+        JToolBarHelper::cancel('rule.cancel', $isNew ? 'JTOOLBAR_CANCEL' : 'JTOOLBAR_CLOSE');
+    }
+
+    protected function setDocument()
+    {
+        $isNew = ($this->item->id < 1);
+        $document = JFactory::getDocument();
+        $document->setTitle($isNew ? "Create rule" : "Edit rule");
+        $document->addScript(JURI::root() . $this->script);
+        $document->addScript(JURI::root() . "/administrator/components/com_production_system/assets/submitbutton.js");
+        JText::script('COM_PRODUCTION_SYSTEM_RULE_ERROR_UNACCEPTABLE');
     }
 }

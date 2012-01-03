@@ -1,6 +1,6 @@
 <?php defined('_JEXEC') or die('Restricted access');
 
-class TableRules extends JTable
+class RuleTableRules extends JTable
 {
     var $id = null;
     var $sign_id = null;

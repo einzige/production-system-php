@@ -31,9 +31,11 @@ class RulesViewRules extends JView
      */
     protected function addToolBar()
     {
-        JToolBarHelper::title("Manage rules", 'rules');
+        JToolBarHelper::title("Manage rules");
         JToolBarHelper::deleteListX('', 'rules.delete');
         JToolBarHelper::editListX('rule.edit');
         JToolBarHelper::addNewX('rule.add');
     }
 }
+
+class ProductionSystemViewRules extends RulesViewRules {}
