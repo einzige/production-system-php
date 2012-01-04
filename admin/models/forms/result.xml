@@ -2,6 +2,6 @@
     <fieldset>
         <field name="id" type="hidden"/>
         <field name="name" type="text" label="Name" description="Name of the sign" size="40" class="inputbox" required="true" default=""/>
-        <field name="description" type="text" label="Description" description="Description of the sign" size="40" default=""/>
+        <field name="description" type="text" label="Description" description="Description of the result" size="40" default=""/>
     </fieldset>
 </form>

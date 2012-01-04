@@ -3,8 +3,7 @@
 class QuizTableQuestions extends JTable
 {
     var $id = null;
-    var $name = '?';
-    var $description = '';
+    var $body = '?';
     var $position = 0;
 
     function __construct( &$db ) {

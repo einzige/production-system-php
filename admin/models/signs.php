@@ -12,6 +12,6 @@ class QuizModelSigns extends JModelList
     protected function getListQuery()
     {
         return JFactory::getDBO()->getQuery(true)->select('id,name,description')
-                                                 ->from('#__signs');
+                                                 ->from('quiz_signs');
     }
 }

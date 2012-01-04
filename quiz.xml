@@ -44,6 +44,8 @@
         <submenu>
             <menu link="option=com_quiz">Manage Rules.</menu>
             <menu link="option=com_quiz&amp;view=signs">Manage Signs.</menu>
+            <menu link="option=com_quiz&amp;view=results">Manage Results.</menu>
+            <menu link="option=com_quiz&amp;view=questions">Manage Questions.</menu>
         </submenu>
     </administration>
     <params>

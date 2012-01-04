@@ -1,6 +1,7 @@
 <form addrulepath="/administrator/components/com_quiz/models/rules">
     <fieldset>
         <field name="id" type="hidden"/>
-        <field name="body" type="text" label="Body" description="Description of the rule" size="40" class="inputbox validate-body" validate="body" required="true" default=""/>
+        <field name="name" type="text" label="Name" description="Name of the rule" size="40" class="inputbox" default=""/>
+        <field name="description" type="text" label="Description" description="Description of the rule" size="40" class="inputbox" default=""/>
     </fieldset>
 </form>
