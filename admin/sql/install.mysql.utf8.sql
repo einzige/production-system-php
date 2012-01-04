@@ -99,6 +99,7 @@ DROP TABLE IF EXISTS `quiz_answers`;
 CREATE TABLE IF NOT EXISTS `quiz_answers` (
   `body` varchar(1024),
   `description` text,
+  `question_id` int(11) NOT NULL,
   `position` int(11) DEFAULT 0,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
