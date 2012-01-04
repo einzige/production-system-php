@@ -7,6 +7,6 @@ class QuizTableSigns extends JTable
     var $description = '';
 
     function __construct( &$db ) {
-        parent::__construct('#__signs', 'id', $db);
+        parent::__construct('quiz_signs', 'id', $db);
     }
 }

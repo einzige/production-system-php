@@ -8,6 +8,6 @@ class QuizTableRules extends JTable
     var $body = '';
 
     function __construct( &$db ) {
-        parent::__construct('#__rules', 'id', $db);
+        parent::__construct('quiz_rules', 'id', $db);
     }
 }
