@@ -27,6 +27,20 @@ class QuizModelAnswer extends QuizExtModel
         return 'administrator/components/com_quiz/models/forms/answer.js';
     }
 
+    public function save($data) {
+        parent::save($data);
+
+        // Store cached field for weights sum.
+        $weights_field = "quiz_signs_ids";
+        if (isset($data[$weights_field])) {
+            $weight = array_sum($data[$weights_field]);
+            $pk = $this->getPK();
+            JFactory::getDBO()->setQuery("UPDATE quiz_answers SET weight_sum=$weight WHERE id=$pk")->query();
+        }
+
+        return true;
+    }
+
     protected function loadFormData()
     {
         $data = JFactory::getApplication()->getUserState('com_quiz.edit.answer.data', array());

@@ -101,6 +101,7 @@ CREATE TABLE IF NOT EXISTS `quiz_answers` (
   `description` text,
   `question_id` int(11) NOT NULL,
   `position` int(11) DEFAULT 0,
+  `weight_sum` float NOT NULL DEFAULT 0,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
