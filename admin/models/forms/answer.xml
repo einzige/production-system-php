@@ -6,6 +6,6 @@
         <field name="position" type="number" label="Ordering" description="Position to be displayed on" size="20" class="inputbox" default="0"/>
         <field name="question_id" type="question" extension="com_quiz" class="inputbox" default="" label="Question" description="Select related question" required="true">
         </field>
-        <field name="sign_ids" type="hidden" />
+        <field name="quiz_signs_ids" type="hidden" />
     </fieldset>
 </form>

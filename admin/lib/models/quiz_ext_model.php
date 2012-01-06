@@ -4,45 +4,51 @@ jimport('joomla.application.component.modeladmin');
 
 class QuizExtModel extends JModelAdmin
 {
-    var $associations = Array(); // "answers_signs" => [answer, sign]
+    var $associations = Array(); // Array("signs" => { fk             => "answer_id",
+                                 //                    weights_table  => "quiz_answers_signs",
+                                 //                    weighted_table => "quiz_signs",
+                                 //                    weighted_fk    => "sing_id"})
 
-    // TODO: refactor, avoid using plainsql.
     public function save($data)
     {
         $result = parent::save($data);
-
         if( ! $result) return $result;
 
-        foreach($this->associations as $asscoiation) $this->save_associated($asscoiation);
-
-
-
+        foreach(array_values($this->associations) as $association) {
+            $this->save_associated($association, $data);
+        }
         return $result;
     }
 
-    public function save_associated($association)
+    // TODO: refactor, avoid using plainsql.
+    public function save_associated($association, $data)
     {
-        $association_name = 
+        $weights_table  = $association["weights_table"];
+        $weighted_table = $association["weighted_table"];
+        $weighted_fk    = $association["weighted_fk"];
+        $fk             = $association["fk"];
+
+        $main_table = $this->getTable()->getTableName();
+        $virtual_field = $weighted_table."_ids";
+
         // How to get an id in a right way?
         $pk	= (!empty($data['id'])) ? $data['id'] : (int)$this->getState($this->getName().'.id');
 
         $db = JFactory::getDBO();
 
-        $db->setQuery("DELETE FROM quiz_answers_signs WHERE answer_id = $pk");
+        $db->setQuery("DELETE FROM $weights_table WHERE $fk = $pk");
         $db->query();
 
-        $sign_ids = Array();
-        if (! isset($data['sign_ids'])) {
-            $db->setQuery("SElECT id, 0 as weight FROM quiz_signs");
-            $signs = $db->loadObjectList();
-
-            foreach($signs as $sign) $sign_ids[$sign->id] = '0';
+        $ids = Array();
+        if (! isset($data[$virtual_field])) {
+            $db->setQuery("SElECT id, 0 as weight FROM $main_table");
+            foreach($db->loadObjectList() as $i) $ids[$i->id] = '0';
         } else {
-            $sign_ids = $data['sign_ids'];
+            $ids = $data[$virtual_field];
         }
 
-        foreach($sign_ids as $sign_id => $weight) {
-            $db->setQuery("INSERT INTO quiz_answers_signs(answer_id, sign_id, weight) VALUES($pk, $sign_id, $weight)");
+        foreach($ids as $rel_id => $weight) {
+            $db->setQuery("INSERT INTO $weights_table($fk, $weighted_fk, weight) VALUES($pk, $rel_id, $weight)");
             $db->query();
         }
     }
@@ -50,29 +56,28 @@ class QuizExtModel extends JModelAdmin
     public function getItem($pk=null) {
         $item = parent::getItem($pk);
 
-        // How to get a pk? wtf?
         $pk	= (!empty($pk)) ? $pk : (int) $this->getState($this->getName().'.id');
-
         $db = JFactory::getDBO();
 
-        $query = $db->getQuery(true);
-        $query->select('quiz_signs.id as id,quiz_signs.name as name,quiz_answers_signs.weight as weight')->from('quiz_signs')
-            ->leftJoin("quiz_answers_signs on quiz_signs.id = quiz_answers_signs.sign_id AND quiz_answers_signs.answer_id = $pk");
+        foreach($this->associations as $association_name => $association) {
+            $weights_table  = $association["weights_table"];
+            $weighted_table = $association["weighted_table"];
+            $weighted_fk    = $association["weighted_fk"];
+            $fk             = $association["fk"];
 
-        $db->setQuery((string)$query);
-        $item->signs = $db->loadObjectList();
+            $query = $db->getQuery(true);
+            $query->select("$weighted_table.id as id,$weighted_table.name as name,$weights_table.weight as weight")->from($weighted_table)
+                  ->leftJoin("$weights_table on $weighted_table.id = $weights_table.$weighted_fk AND $weights_table.$fk = $pk");
+
+            $db->setQuery((string)$query);
+            $item->$association_name = $db->loadObjectList();
+        }
 
         return $item;
     }
 
-    protected function loadFormData()
+    public function getForm($data = array(), $loadData = true)
     {
-        // Check the session for previously entered form data.
-        $data = JFactory::getApplication()->getUserState('com_quiz.edit.answer.data', array());
-        if (empty($data))
-        {
-            $data = $this->getItem();
-        }
-        return $data;
+        parent::getForm($data, $loadData);
     }
 }
