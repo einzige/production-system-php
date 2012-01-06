@@ -6,6 +6,7 @@ class QuizTableAnswers extends JTable
     var $body = 'Yes';
     var $description = '';
     var $question_id = null;
+    var $sign_ids = Array();
 
     function __construct( &$db ) {
         parent::__construct('quiz_answers', 'id', $db);

@@ -11,7 +11,7 @@ class JFormFieldQuestion extends JFormFieldList
     {
         $db = JFactory::getDBO();
 
-        $query = new JDatabaseQuery;
+        $query = $db->getQuery(true);
         $query->select('quiz_questions.id as id,body');
         $query->from('quiz_questions');
 

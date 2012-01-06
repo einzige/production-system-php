@@ -1,0 +1,11 @@
+<form addrulepath="/administrator/components/com_quiz/models/rules">
+    <fieldset>
+        <field name="id" type="hidden"/>
+        <field name="body" type="text" label="Answer body" description="Answer a question" size="40" class="inputbox" required="true" default="Answer"/>
+        <field name="description" type="text" label="Question desciption" description="Just a hit" size="40" class="inputbox" default=""/>
+        <field name="position" type="number" label="Ordering" description="Position to be displayed on" size="20" class="inputbox" default="0"/>
+        <field name="question_id" type="question" extension="com_quiz" class="inputbox" default="" label="Question" description="Select related question" required="true">
+        </field>
+        <field name="sign_ids" type="hidden" />
+    </fieldset>
+</form>

@@ -11,8 +11,11 @@
     <td class="center" style="color:red; font-size: 14pt;">
         <?php echo $item->position; ?>
     </td>
-    <td class="center">
+    <td class="center" style="color: green; font-size: 12pt;">
         <?php echo $item->body; ?>
+    </td>
+    <td class="center">
+        <?php echo $item->question; ?>
     </td>
 </tr>
 <?php endforeach; ?>

@@ -109,13 +109,13 @@ CREATE TABLE IF NOT EXISTS `quiz_answers` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `answers_sings`
+-- Table structure for table `answers_signs`
 --
-DROP TABLE IF EXISTS `quiz_answers_sings`;
+DROP TABLE IF EXISTS `quiz_answers_signs`;
 
-CREATE TABLE IF NOT EXISTS `quiz_answers_sings` (
+CREATE TABLE IF NOT EXISTS `quiz_answers_signs` (
   `answer_id` int(11) NOT NULL,
-  `sing_id` int(11) NOT NULL,
+  `sign_id` int(11) NOT NULL,
   `weight` float NOT NULL DEFAULt 0,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
