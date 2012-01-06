@@ -8,11 +8,11 @@
     <td>
         <?php echo JHtml::_('grid.id', $i, $item->id); ?>
     </td>
-    <td style="color:green; font-size: 12pt;">
-        <?php echo $item->name; ?>
+    <td class="center" style="color:red; font-size: 14pt;">
+        <?php echo $item->position; ?>
     </td>
-    <td>
-        <?php echo $item->description; ?>
+    <td class="center">
+        <?php echo $item->body; ?>
     </td>
 </tr>
 <?php endforeach; ?>

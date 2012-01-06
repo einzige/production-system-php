@@ -2,7 +2,7 @@
 
 jimport('joomla.application.component.modellist');
 
-class QuizModelRules extends JModelList
+class QuizModelResults extends JModelList
 {
     /**
      * Method to build an SQL query to load the list data.
@@ -11,7 +11,7 @@ class QuizModelRules extends JModelList
      */
     protected function getListQuery()
     {
-        return JFactory::getDBO()->getQuery(true)->select('id,description,name')
-                                                 ->from('quiz_rules');
+        return JFactory::getDBO()->getQuery(true)->select('id,name,description')
+                                                 ->from('quiz_results');
     }
 }

@@ -1,9 +1,19 @@
 <?php defined( '_JEXEC' ) or die( 'Restricted access' );
 
-jimport('joomla.application.component.modeladmin');
+require_once(JPATH_COMPONENT_ADMINISTRATOR.DS.'lib'.DS.'models'.DS.'quiz_ext_model.php');
 
-class QuizModelRule extends JModelAdmin
+class QuizModelRule extends QuizExtModel
 {
+    var $signs = Array();
+    var $associations = Array("signs"   => Array("fk"             => "rule_id",
+                                                 "weights_table"  => "quiz_rules_signs",
+                                                 "weighted_table" => "quiz_signs",
+                                                 "weighted_fk"    => "sign_id"),
+                              "results" => Array("fk"             => "rule_id",
+                                                 "weights_table"  => "quiz_rules_results",
+                                                 "weighted_table" => "quiz_results",
+                                                 "weighted_fk"    => "result_id"));
+
     public function getTable($type = 'Rules', $prefix = 'QuizTable', $config = array())
     {
         return JTable::getInstance($type, $prefix, $config);
@@ -12,10 +22,7 @@ class QuizModelRule extends JModelAdmin
     public function getForm($data = array(), $loadData = true)
     {
         $form = $this->loadForm('com_quiz.rule', 'rule', array('control' => 'jform', 'load_data' => $loadData));
-        if (empty($form))
-        {
-            return false;
-        }
+        if (empty($form)) return false;
         return $form;
     }
 
@@ -26,12 +33,8 @@ class QuizModelRule extends JModelAdmin
 
     protected function loadFormData()
     {
-        // Check the session for previously entered form data.
         $data = JFactory::getApplication()->getUserState('com_quiz.edit.rule.data', array());
-        if (empty($data))
-        {
-            $data = $this->getItem();
-        }
+        if (empty($data)) $data = $this->getItem();
         return $data;
     }
 }

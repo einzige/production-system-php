@@ -6,6 +6,8 @@
     <th width="20">
         <input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count($this->items); ?>);" />
     </th>
-    <th>Name</th>
-    <th>Description</th>
+    <th>Position</th>
+    <th>
+        Question itself
+    </th>
 </tr>

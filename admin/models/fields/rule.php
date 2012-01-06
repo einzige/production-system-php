@@ -12,8 +12,8 @@ class JFormFieldRule extends JFormFieldList
         $db = JFactory::getDBO();
 
         $query = new JDatabaseQuery;
-        $query->select('#__rules.id as id,body');
-        $query->from('#__rules');
+        $query->select('quiz_rules.id as id,body');
+        $query->from('quiz_rules');
 
         $db->setQuery((string)$query);
 

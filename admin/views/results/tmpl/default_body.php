@@ -8,7 +8,7 @@
     <td>
         <?php echo JHtml::_('grid.id', $i, $item->id); ?>
     </td>
-    <td style="color:green; font-size: 12pt;">
+    <td class="center" style="color:red; font-size: 14pt;">
         <?php echo $item->name; ?>
     </td>
     <td>
