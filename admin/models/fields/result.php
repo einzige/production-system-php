@@ -3,17 +3,16 @@
 jimport('joomla.form.helper');
 JFormHelper::loadFieldClass('list');
 
-class JFormFieldSign extends JFormFieldList
+class JFormFieldResult extends JFormFieldList
 {
-    protected $type = 'Sign';
+    protected $type = 'Result';
 
     protected function getOptions()
     {
         $db = JFactory::getDBO();
 
         $query = new JDatabaseQuery;
-        $query->select('quiz_signs.id as id,name');
-        $query->from('quiz_signs');
+        $query->select('quiz_results.id as id,name')->from('quiz_results');
 
         $db->setQuery((string)$query);
 

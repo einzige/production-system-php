@@ -3,17 +3,17 @@
 jimport('joomla.form.helper');
 JFormHelper::loadFieldClass('list');
 
-class JFormFieldSign extends JFormFieldList
+class JFormFieldQuestion extends JFormFieldList
 {
-    protected $type = 'Sign';
+    protected $type = 'Question';
 
     protected function getOptions()
     {
         $db = JFactory::getDBO();
 
-        $query = new JDatabaseQuery;
-        $query->select('quiz_signs.id as id,name');
-        $query->from('quiz_signs');
+        $query = $db->getQuery(true);
+        $query->select('quiz_questions.id as id,body');
+        $query->from('quiz_questions');
 
         $db->setQuery((string)$query);
 
@@ -23,7 +23,7 @@ class JFormFieldSign extends JFormFieldList
         {
             foreach($messages as $message)
             {
-                $options[] = JHtml::_('select.option', $message->id, $message->name);
+                $options[] = JHtml::_('select.option', $message->id, $message->body);
             }
         }
         $options = array_merge(parent::getOptions(), $options);

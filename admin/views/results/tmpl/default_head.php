@@ -7,5 +7,7 @@
         <input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count($this->items); ?>);" />
     </th>
     <th>Name</th>
-    <th>Description</th>
+    <th>
+        Description
+    </th>
 </tr>
