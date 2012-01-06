@@ -120,3 +120,19 @@ CREATE TABLE IF NOT EXISTS `quiz_answers_signs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rules_signs`
+--
+DROP TABLE IF EXISTS `quiz_rules_signs`;
+
+CREATE TABLE IF NOT EXISTS `quiz_rules_signs` (
+  `rule_id` int(11) NOT NULL,
+  `sign_id` int(11) NOT NULL,
+  `weight` float NOT NULL DEFAULt 0,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
