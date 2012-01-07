@@ -1,6 +1,6 @@
 <?php defined( '_JEXEC' ) or die( 'Restricted access' );
 
-require_once(JPATH_COMPONENT_ADMINISTRATOR.DS.'lib'.DS.'models'.DS.'quiz_ext_model.php');
+require_once(JPATH_COMPONENT_SITE.DS.'lib'.DS.'models'.DS.'quiz_ext_model.php');
 
 class QuizModelRule extends QuizExtModel
 {

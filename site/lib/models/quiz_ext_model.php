@@ -30,7 +30,7 @@ class QuizExtModel extends JModelAdmin
         $main_table = $this->getTable()->getTableName();
         $virtual_field = $weighted_table."_ids";
 
-        $pk	= $this->getPK();
+        $pk	= $this->getPK($data);
         $db = JFactory::getDBO();
 
         $db->setQuery("DELETE FROM $weights_table WHERE $fk = $pk");
@@ -78,7 +78,7 @@ class QuizExtModel extends JModelAdmin
         parent::getForm($data, $loadData);
     }
 
-    protected function getPK() {
+    public function getPK($data = Array()) {
         return (!empty($data['id'])) ? $data['id'] : (int)$this->getState($this->getName().'.id');
     }
 }

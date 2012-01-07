@@ -1,0 +1,6 @@
+<form addrulepath="/administrator/components/com_quiz/models/rules">
+    <fieldset>
+        <field name="id" type="hidden"/>
+        <field name="quiz_answers_ids" type="hidden" />
+    </fieldset>
+</form>

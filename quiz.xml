@@ -10,20 +10,23 @@
     <version>1.7.0</version>
     <description>Provides to build complex datasets using production rules.</description>
     <files folder="site">
+        <filename>controller.php</filename>
         <filename>index.html</filename>
-        <filename>production_system.php</filename>
+        <filename>quiz.php</filename>
         <folder>assets</folder>
         <folder>controllers</folder>
         <folder>models</folder>
         <folder>helpers</folder>
+        <folder>tables</folder>
         <folder>views</folder>
+        <folder>lib</folder>
     </files>
-    <install> <!-- Runs on install -->
+    <install>
         <sql>
             <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
         </sql>
     </install>
-    <uninstall> <!-- Runs on uninstall -->
+    <uninstall>
         <sql>
             <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
         </sql>
@@ -34,7 +37,6 @@
             <filename>controller.php</filename>
             <filename>quiz.php</filename>
             <folder>assets</folder>
-            <folder>lib</folder>
             <folder>controllers</folder>
             <folder>models</folder>
             <folder>tables</folder>
