@@ -101,6 +101,7 @@ CREATE TABLE IF NOT EXISTS `quiz_answers` (
   `description` text,
   `question_id` int(11) NOT NULL,
   `position` int(11) DEFAULT 0,
+  `weight_sum` float NOT NULL DEFAULT 0,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -132,6 +133,36 @@ DROP TABLE IF EXISTS `quiz_rules_signs`;
 CREATE TABLE IF NOT EXISTS `quiz_rules_signs` (
   `rule_id` int(11) NOT NULL,
   `sign_id` int(11) NOT NULL,
+  `weight` float NOT NULL DEFAULt 0,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quizzes`
+--
+DROP TABLE IF EXISTS `quiz_quizzes`;
+
+CREATE TABLE IF NOT EXISTS `quiz_quizzes` (
+  `result_id` int(11),
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quizzes_results`
+--
+DROP TABLE IF EXISTS `quiz_quizzes_results`;
+
+CREATE TABLE IF NOT EXISTS `quiz_quizzes_results` (
+  `quiz_id` int(11) NOT NULL,
+  `result_id` int(11) NOT NULL,
   `weight` float NOT NULL DEFAULt 0,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)

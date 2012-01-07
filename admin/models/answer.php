@@ -1,6 +1,6 @@
 <?php defined( '_JEXEC' ) or die( 'Restricted access' );
 
-require_once(JPATH_COMPONENT_ADMINISTRATOR.DS.'lib'.DS.'models'.DS.'quiz_ext_model.php');
+require_once(JPATH_COMPONENT_SITE.DS.'lib'.DS.'models'.DS.'quiz_ext_model.php');
 
 class QuizModelAnswer extends QuizExtModel
 {
@@ -25,6 +25,20 @@ class QuizModelAnswer extends QuizExtModel
     public function getScript()
     {
         return 'administrator/components/com_quiz/models/forms/answer.js';
+    }
+
+    public function save($data) {
+        parent::save($data);
+
+        // Store cached field for weights sum.
+        $weights_field = "quiz_signs_ids";
+        if (isset($data[$weights_field])) {
+            $weight = array_sum($data[$weights_field]);
+            $pk = $this->getPK();
+            JFactory::getDBO()->setQuery("UPDATE quiz_answers SET weight_sum=$weight WHERE id=$pk")->query();
+        }
+
+        return true;
     }
 
     protected function loadFormData()

@@ -20,7 +20,6 @@ class QuizExtModel extends JModelAdmin
         return $result;
     }
 
-    // TODO: refactor, avoid using plainsql.
     public function save_associated($association, $data)
     {
         $weights_table  = $association["weights_table"];
@@ -31,9 +30,7 @@ class QuizExtModel extends JModelAdmin
         $main_table = $this->getTable()->getTableName();
         $virtual_field = $weighted_table."_ids";
 
-        // How to get an id in a right way?
-        $pk	= (!empty($data['id'])) ? $data['id'] : (int)$this->getState($this->getName().'.id');
-
+        $pk	= $this->getPK($data);
         $db = JFactory::getDBO();
 
         $db->setQuery("DELETE FROM $weights_table WHERE $fk = $pk");
@@ -79,5 +76,9 @@ class QuizExtModel extends JModelAdmin
     public function getForm($data = array(), $loadData = true)
     {
         parent::getForm($data, $loadData);
+    }
+
+    public function getPK($data = Array()) {
+        return (!empty($data['id'])) ? $data['id'] : (int)$this->getState($this->getName().'.id');
     }
 }
