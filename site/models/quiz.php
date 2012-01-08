@@ -36,11 +36,12 @@ class QuizModelQuiz extends QuizExtModel
         // Calculate weights for each answer.
         $weights = Array();
         foreach(array_values($data['quiz_answers_ids']) as $answer_id) {
-            $this->_db->setQuery("select quiz_answers_signs.weight as weight, quiz_answers_signs.sign_id as sign_id
-                                  from quiz_answers_signs
-                                  where answer_id=$answer_id");
+            $this->_db->setQuery("select quiz_answers_signs.weight  as weight,
+                                         quiz_answers_signs.sign_id as sign_id
+                                  from   quiz_answers_signs
+                                  where  answer_id=$answer_id");
 
-            // TODO(SZ): you can do it in SQL; either you can select an Array to call array_sum.
+            // TODO(SZ): you can do it in SQL;
             foreach($this->_db->loadObjectList() as $i) {
                 if( ! isset($weights[$i->sign_id]))
                     $weights[$i->sign_id] = 0;
@@ -49,34 +50,39 @@ class QuizModelQuiz extends QuizExtModel
             }
         }
 
-        // Normalize results.
-        $div = array_sum($weights) / sizeof($weights);
 
-        // Build query.
+        $div = array_sum($weights);
+
+
         $conditions = Array();
         $joins = Array();
         foreach($weights as $s => $w) {
+            // Normalize results.
             $w = $w / $div;
-            $conditions[]= "(rs$s.weight >= $w AND rs$s.sign_id = $s)";
+
+            // Build query.
+            $conditions[]= "(rs$s.weight <= $w AND rs$s.sign_id = $s)";
             $joins[]= "left join quiz_rules_signs AS rs$s on  quiz_rules.id = rs$s.rule_id";
         }
         $where_condition = join(" AND ", $conditions);
         $joins_condition = join(" \n ", $joins);
 
         // Check rules.
-        $this->_db->setQuery(
-          "select quiz_rules.id as rule_id, quiz_results.id, quiz_results.name, quiz_rules_results.weight from quiz_results, quiz_rules_results
+        $this->_db->setQuery("select quiz_rules.id from quiz_rules $joins_condition WHERE $where_condition");
+        $rule_ids = $this->_db->loadResultArray();
 
-           left join quiz_rules on quiz_rules.id = quiz_rules_results.rule_id
-           $joins_condition
-
-           where (quiz_rules_results.result_id = quiz_results.id AND  quiz_rules_results.rule_id = quiz_rules.id)
-           AND   $where_condition"
-        );
+        $results = Array();
+        foreach($rule_ids as $rule_id) {
+            $results[] = $this->_db->setQuery("select quiz_results.id, quiz_rules_results.weight
+                                               from quiz_results
+                                               left join quiz_rules_results on quiz_results.id = quiz_rules_results.result_id
+                                               left join quiz_rules on quiz_rules_results.rule_id = quiz_rules.id
+                                               where quiz_rules.id = $rule_id")->loadObject();
+        }
 
         // Calculate weight for each result.
         $weights = Array();
-        foreach($this->_db->loadObjectList() as $row) {
+        foreach($results as $row) {
             if( ! isset($weights[$row->id]))
                 $weights[$row->id] = $row->weight;
             else

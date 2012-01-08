@@ -22,6 +22,9 @@
         <folder>lib</folder>
     </files>
     <install>
+        <params>
+            <param name="results_limit" type="number" label="Results limit:" description="Results number to be displayed on the page." />
+        </params>
         <sql>
             <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
         </sql>
