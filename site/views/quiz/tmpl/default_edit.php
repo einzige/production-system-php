@@ -17,10 +17,17 @@ JHtml::_('behavior.formvalidation');
     <h1>Questions</h1>
     <div>
         <?php foreach($this->item->questions as $q): ?>
-            <p><?php echo $q->body ?></p>
+            <b><?php echo $q->body ?></b>
             <ul>
                 <?php foreach($q->answers as $a): ?>
-                    <input type="radio" name="jform[quiz_answers_ids][<?php echo $q->id ?>]" value="<?php echo $a->id ?>">&nbsp;<?php echo $a->body ?><br>
+                    <input type="radio"
+                           name="jform[quiz_answers_ids][<?php echo $q->id ?>]"
+                           value="<?php echo $a->id ?>"/>&nbsp;<?php echo $a->body ?>
+                    &nbsp;
+                    <span style="color:gray; font-style:italic;">
+                      <?php echo $a->description ?>
+                    </span>
+                    <br/>
                 <?php endforeach ?>
             </ul>
         <?php endforeach ?>

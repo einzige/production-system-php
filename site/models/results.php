@@ -26,7 +26,9 @@ class QuizModelResults extends JModel
     {
         if (empty( $this->_data )) {
             $query = $this->_db->getQuery(true);
-            $query->select("quiz_quizzes_results.weight as weight, quiz_results.name as name")
+            $query->select("quiz_quizzes_results.weight as weight, 
+                            quiz_results.name as name, 
+                            quiz_results.description as description")
                   ->from("quiz_quizzes_results")
                   ->leftJoin("quiz_results on quiz_quizzes_results.result_id = quiz_results.id")
                   ->where("quiz_quizzes_results.quiz_id = $this->_id")
