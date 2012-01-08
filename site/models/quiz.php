@@ -48,11 +48,16 @@ class QuizModelQuiz extends QuizExtModel
                                               $weights[$i->sign_id] * $i->weight : $i->weight;
         }
 
-        // Build query.
+
+        $div        = array_sum($weights);
         $conditions = Array();
         $joins      = Array();
         foreach($weights as $s => $w)
         {
+            // Normalize results.
+            $w = $w / $div;
+
+            // Build query.
             $conditions[]= "(rs$s.weight <= $w AND rs$s.sign_id = $s)";
             $joins     []= "left join quiz_rules_signs AS rs$s on  quiz_rules.id = rs$s.rule_id";
         }
