@@ -29,7 +29,8 @@ class QuizModelResults extends JModel
             $query->select("quiz_quizzes_results.weight as weight, quiz_results.name as name")
                   ->from("quiz_quizzes_results")
                   ->leftJoin("quiz_results on quiz_quizzes_results.result_id = quiz_results.id")
-                  ->where("quiz_quizzes_results.quiz_id = $this->_id");
+                  ->where("quiz_quizzes_results.quiz_id = $this->_id")
+                  ->order('weight DESC');
 
             $this->_db->setQuery((string)$query);
             $this->_data = $this->_db->loadObjectList();

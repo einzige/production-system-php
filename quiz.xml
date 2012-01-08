@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="component" version="1.7" method="install">
+<extension type="component" version="1.7" method="upgrade">
     <name>quiz</name>
     <author>Sergei Zinin</author>
     <creationDate>January 2012</creationDate>
