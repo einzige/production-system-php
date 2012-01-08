@@ -43,19 +43,22 @@ class QuizModelQuiz extends QuizExtModel
 
             // Initialize weights.
             // NOTE(SZ): you can do it in SQL;
-            foreach($this->_db->loadObjectList() as $i)
+            foreach($this->_db->loadObjectList() as $i) {
                 $weights[$i->sign_id] = isset($weights[$i->sign_id]) ?
-                                              $weights[$i->sign_id] * $i->weight : $i->weight;
+                                              $weights[$i->sign_id] + $i->weight : $i->weight;
+            }
         }
 
 
-        $div        = array_sum($weights);
+        $div        = sizeof($weights);
         $conditions = Array();
         $joins      = Array();
         foreach($weights as $s => $w)
         {
             // Normalize results.
             $w = $w / $div;
+
+            echo "-- sign: $s => weight: $w --<br/>";
 
             // Build query.
             $conditions[]= "(rs$s.weight <= $w AND rs$s.sign_id = $s)";
@@ -67,6 +70,8 @@ class QuizModelQuiz extends QuizExtModel
         // Get rule ids where conditions are passing sign weights.
         $rule_ids = $this->_db->setQuery("select quiz_rules.id from quiz_rules $joins_condition WHERE $where_condition")
                               ->loadResultArray();
+
+        echo "select quiz_rules.id from quiz_rules $joins_condition WHERE $where_condition";
 
         // Get results from rules.
         // Calculate weight for each result.
