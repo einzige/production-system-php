@@ -33,7 +33,7 @@ class QuizModelQuiz extends QuizExtModel
     public function save($data) {
         $result = JModelAdmin::save($data);
 
-        // Calculate weights for each answer.
+        // Calculate sign weights (as a sum of weights for each answer).
         $weights = Array();
         foreach(array_values($data['quiz_answers_ids']) as $answer_id) {
             $this->_db->setQuery("select quiz_answers_signs.weight  as weight,
@@ -41,52 +41,47 @@ class QuizModelQuiz extends QuizExtModel
                                   from   quiz_answers_signs
                                   where  answer_id=$answer_id");
 
-            // TODO(SZ): you can do it in SQL;
-            foreach($this->_db->loadObjectList() as $i) {
-                if( ! isset($weights[$i->sign_id]))
-                    $weights[$i->sign_id] = 0;
-                else
-                    $weights[$i->sign_id] += $i->weight;
-            }
+            // Initialize weights.
+            // NOTE(SZ): you can do it in SQL;
+            foreach($this->_db->loadObjectList() as $i)
+                $weights[$i->sign_id] = isset($weights[$i->sign_id]) ?
+                                              $weights[$i->sign_id] * $i->weight : $i->weight;
         }
 
 
-        $div = array_sum($weights);
-
-
+        $div        = array_sum($weights);
         $conditions = Array();
-        $joins = Array();
-        foreach($weights as $s => $w) {
+        $joins      = Array();
+        foreach($weights as $s => $w)
+        {
             // Normalize results.
             $w = $w / $div;
 
             // Build query.
             $conditions[]= "(rs$s.weight <= $w AND rs$s.sign_id = $s)";
-            $joins[]= "left join quiz_rules_signs AS rs$s on  quiz_rules.id = rs$s.rule_id";
+            $joins     []= "left join quiz_rules_signs AS rs$s on  quiz_rules.id = rs$s.rule_id";
         }
         $where_condition = join(" AND ", $conditions);
         $joins_condition = join(" \n ", $joins);
 
-        // Check rules.
-        $this->_db->setQuery("select quiz_rules.id from quiz_rules $joins_condition WHERE $where_condition");
-        $rule_ids = $this->_db->loadResultArray();
+        // Get rule ids where conditions are passing sign weights.
+        $rule_ids = $this->_db->setQuery("select quiz_rules.id from quiz_rules $joins_condition WHERE $where_condition")
+                              ->loadResultArray();
 
-        $results = Array();
-        foreach($rule_ids as $rule_id) {
-            $results[] = $this->_db->setQuery("select quiz_results.id, quiz_rules_results.weight
-                                               from quiz_results
-                                               left join quiz_rules_results on quiz_results.id = quiz_rules_results.result_id
-                                               left join quiz_rules on quiz_rules_results.rule_id = quiz_rules.id
-                                               where quiz_rules.id = $rule_id")->loadObject();
-        }
-
+        // Get results from rules.
         // Calculate weight for each result.
         $weights = Array();
-        foreach($results as $row) {
-            if( ! isset($weights[$row->id]))
-                $weights[$row->id] = $row->weight;
-            else
-                $weights[$row->id] *= $row->weight;
+        foreach($rule_ids as $rule_id) {
+            $results = $this->_db->setQuery("select quiz_results.id, quiz_rules_results.weight
+                                             from   quiz_results
+
+                                             left join quiz_rules_results on quiz_results.id = quiz_rules_results.result_id
+                                             left join quiz_rules         on quiz_rules_results.rule_id = quiz_rules.id
+
+                                             where quiz_rules.id = $rule_id")->loadObjectList();
+            foreach($results as $row)
+                $weights[$row->id] = isset($weights[$row->id]) ?
+                                           $weights[$row->id] * $row->weight : $row->weight;
         }
 
         // Create report.

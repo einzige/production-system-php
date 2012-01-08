@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="1.7" method="upgrade">
     <name>quiz</name>
-    <author>Anton Goroshkin</author>
-    <creationDate>January 2011</creationDate>
+    <author>Sergei Zinin</author>
+    <creationDate>January 2012</creationDate>
     <copyright>(C) 2011 - 2012 Siberian aerospace university. All rights reserved.</copyright>
     <license>GNU General Public License version 2 or later.</license>
-    <authorEmail>antichaos@gmail.com</authorEmail>
-    <authorUrl>antichaos.narod.ru</authorUrl>
-    <version>1.7.0</version>
+    <authorEmail>szinin@partyearth.com</authorEmail>
+    <authorUrl>www.partyearth.com</authorUrl>
+    <version>0.0.1</version>
     <description>Provides to build complex datasets using production rules.</description>
     <files folder="site">
         <filename>controller.php</filename>
